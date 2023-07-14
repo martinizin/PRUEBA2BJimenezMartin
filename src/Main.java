@@ -1,17 +1,44 @@
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Intro with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+   public static void main(String[] args) {
+     ;
+      String filePath = "datos.dat";
+      Estudiantes[] estudiantes=new Estudiantes[4];
+     estudiantes[0] = new Estudiantes("Leonel", "Messi",238967,17684938,"Leo");
+      try (FileOutputStream fileout = new FileOutputStream(filePath);
+           ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileout);
+      ) {
+         objectOutputStream.writeObject(estudiantes);
+         System.out.println("archivo escrito correctamente");
 
-        // Press Mayús+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
 
-            // Press Mayús+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
-    }
-}
+      } catch (IOException e) {
+         throw new RuntimeException(e);
+      }
+      ///////////////
+      try(
+              FileInputStream fileIn=new FileInputStream(filePath);
+              ObjectInputStream objectInputStream=new ObjectInputStream(fileIn);
+      ) {
+         Estudiantes readObject=(Estudiantes) objectInputStream.readObject();
+         System.out.println("El ojeto en disco es: "+readObject);
+         System.out.println(readObject.getCodigo());
+         System.out.println(readObject.getCedula());
+         System.out.println(readObject.getNombre());
+         System.out.println(readObject.getApellido());
+         System.out.println(readObject.getSigno());
+
+      } catch (IOException e) {
+         throw new RuntimeException(e);
+      } catch (ClassNotFoundException e) {
+         throw new RuntimeException(e);
+      }
+   }
+
+
+   }

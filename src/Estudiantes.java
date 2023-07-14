@@ -1,5 +1,10 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Estudiantes extends JFrame implements Serializable {
 
@@ -11,9 +16,9 @@ public class Estudiantes extends JFrame implements Serializable {
     private JComboBox boxmes;
     private JComboBox boxdia;
     private JComboBox comboBox4;
-    private JCheckBox checkBox1;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox3;
+    private JCheckBox checkrojo;
+    private JCheckBox checkverde;
+    private JCheckBox checkninguno;
     private JButton botoncarga;
     private JButton botonguardar;
     private JButton botonanterior;
@@ -25,6 +30,7 @@ public class Estudiantes extends JFrame implements Serializable {
     private JLabel labelsigno;
     private JLabel labelnacimiento;
     private JLabel labelcolor;
+    private JLabel respuestaL;
 
 
     private String nombre;
@@ -32,6 +38,16 @@ public class Estudiantes extends JFrame implements Serializable {
     private int codigo;
     private int cedula;
     private String signo;
+    private ArrayList nomest = new ArrayList();
+    private ArrayList apest = new ArrayList();
+    private ArrayList cedest = new ArrayList();
+    private ArrayList codest = new ArrayList();
+    private ArrayList anioest = new ArrayList();
+    private ArrayList mesest = new ArrayList();
+    private ArrayList diadest = new ArrayList();
+    private boolean est=false;
+    private int i=0;
+    private JPanel estu;
 
     public Estudiantes(String nombre, String apellido, int codigo, int cedula, String signo) {
         this.nombre = nombre;
@@ -39,7 +55,29 @@ public class Estudiantes extends JFrame implements Serializable {
         this.codigo = codigo;
         this.cedula = cedula;
         this.signo = signo;
+        botonguardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nomest.add(labelnombres.getText());
+                apest.add(labelapellido.getText());
+                codest.add(labelcodigo.getText());
+                cedest.add(labelcedula.getText());
+                labelnombres.setText("");
+                labelapellido.setText("");
+                labelcodigo.setText("");
+                labelcedula.setText("");
+                respuestaL.setText("Se a guardado el auto correctamente");
+            }
+        });
+        boxanio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+
+        });
     }
+
 
     public String getNombre() {
         return nombre;
@@ -80,5 +118,7 @@ public class Estudiantes extends JFrame implements Serializable {
     public void setSigno(String signo) {
         this.signo = signo;
     }
+
+
 }
 
